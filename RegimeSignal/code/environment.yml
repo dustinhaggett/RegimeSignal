@@ -1,0 +1,30 @@
+name: regime-alpha
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - statsmodels
+  - pytorch
+  - tensorflow
+  - jupyter
+  - jupyterlab
+  - ipywidgets
+  - pytest
+  - flake8
+  - pylint
+  - pip
+  - pip:
+    - ccxt>=2.0.0
+    - ta  # Technical analysis library
+    - hmmlearn  # For HMM-based regime detection
+    - stable-baselines3  # Optional for RL approaches
+    - backtesting  # Backtesting framework
+    - plotly  # Interactive visualizations
+    - dash  # For creating interactive dashboards
+    - pyfolio  # Portfolio and risk analysis

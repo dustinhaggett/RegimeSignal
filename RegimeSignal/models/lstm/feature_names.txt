@@ -1,0 +1,11 @@
+volume
+bb_width
+rocr_48
+ulcer_index
+awesome_oscillator
+volume_normalized
+ema_50
+adx
+trend_strength
+cmf
+mfi
