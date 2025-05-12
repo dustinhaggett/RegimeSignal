@@ -1,96 +1,132 @@
-# RegimeAlpha
+# RegimeSignal: Market Regime Detection in Cryptocurrency Markets
 
-A regime-aware algorithmic trading system for cryptocurrency markets using time series analysis and greedy decision algorithms. This project identifies different market regimes (trending, ranging, volatile) and applies optimized trading strategies for each condition with a focus on high-leverage trading scenarios.
+**Author:** Dustin M. Haggett  
+**Course:** CpE646 – Pattern Recognition and Classification  
+**Project Type:** Individual Research Project  
+**Model:** LSTM with Multi-Head Attention  
+**Target Asset:** BTC/USDT Perpetual Futures (15-minute intervals)
 
-## Project Team
-- Dustin Haggett
-- Lambert Kongnyuy
-- Mateusz Marciniak
+---
 
-## Project Overview
+## Overview
 
-RegimeAlpha implements a machine learning-based trading system that:
-1. Identifies market regimes using clustering/HMM techniques
-2. Predicts price movements using LSTM/TCN neural networks
-3. Makes trading decisions using a greedy algorithm optimized for each regime
-4. Backtests performance on historical cryptocurrency data
+RegimeSignal is a deep learning pipeline for classifying market regimes—Bullish, Bearish, and Neutral—in the BTC/USDT perpetual futures market. This project combines classical pattern recognition techniques (e.g., PCA, mutual information, random forest) with modern sequence models (LSTM + Attention). It aims to generate adaptive trading signals based on high-frequency technical indicators and dynamic market conditions.
 
-The system is specifically designed for high-leverage trading (30x-50x) in the BTC/USDT market using 15-minute time frames.
+The final model achieved **89.1% classification accuracy**, with strong results in bearish and bullish regimes.
 
-## Repository Structure
+---
+
+## Key Features
+
+- Feature engineering with 23 technical indicators across trend, momentum, volatility, volume, and risk
+- Dimensionality reduction using PCA (96.6% variance explained)
+- Bi-directional LSTM model with multi-head attention mechanism
+- Class imbalance handling via Focal Loss and class weighting
+- Walk-forward validation and regime transition matrix analysis
+- Confidence-aware trading strategy with position sizing
+
+---
+
+## Project Structure
 
 ```
-RegimeAlpha/
+.
 ├── code/
-│   ├── data_pipeline/      # Data collection and preprocessing
-│   ├── regime_detection/   # Market regime identification
-│   ├── modeling/           # ML models for price prediction
-│   ├── trading_logic/      # Trading strategy implementation
-│   ├── backtesting/        # Backtesting engine
-│   ├── visualization/      # Results visualization
-│   └── main.py             # Main execution script
-├── documents/              # Paper and presentation materials
-└── references/             # Related research papers and resources
+│   ├── modeling/          # Model architecture, training, backtesting, strategy
+│   ├── analysis/          # Data diagnostics, forward testing, visualization
+│   └── data_pipeline/     # Raw data collection and processing
+├── data/
+│   └── processed/         # Cleaned and labeled data for training/testing
+├── models/
+│   └── lstm/              # Saved models, scalers, training history
+├── environment.yml        # Conda environment file
+└── README.md
 ```
 
-## Getting Started
+---
 
-### Prerequisites
-- Python 3.8+
-- Dependencies listed in `environment.yml`
+## Setup
 
-### Installation
-
-Clone this repository:
-```bash
-git clone https://github.com/[username]/RegimeAlpha.git
-cd RegimeAlpha
-```
-
-Create the Conda environment:
 ```bash
 conda env create -f environment.yml
-conda activate regime-alpha
+conda activate regime-trader
 ```
 
-### Running the Project
+---
 
-Data collection:
-```bash
-python RegimeAlpha/code/main.py --mode data_collection
-```
+## How to Run
 
-Train regime detection model:
-```bash
-python RegimeAlpha/code/main.py --mode train_regime
-```
+1. **Collect latest market data:**
+   ```bash
+   python code/data_pipeline/data_collector.py
+   ```
+2. **Generate features and regime labels:**
+   ```bash
+   python code/modeling/feature_engineering.py
+   ```
+3. **Train the LSTM model:**
+   ```bash
+   python code/modeling/lstm_trainer.py
+   ```
+4. **Evaluate performance:**
+   ```bash
+   python code/modeling/walk_forward_test.py
+   # or
+   python code/modeling/backtesting.py
+   ```
+5. **Deploy the trading strategy:**
+   ```bash
+   python code/modeling/trading_strategy.py
+   ```
 
-Train price prediction model:
-```bash
-python RegimeAlpha/code/main.py --mode train_predictor
-```
+---
 
-Run backtesting:
-```bash
-python RegimeAlpha/code/main.py --mode backtest
-```
+## Model Artifacts
 
-Generate visualizations:
-```bash
-python RegimeAlpha/code/main.py --mode visualize
-```
+| File                           | Description                                 |
+|--------------------------------|---------------------------------------------|
+| regime_lstm_calibrated.pth     | Trained LSTM model weights                  |
+| scaler.pkl                     | Saved StandardScaler for input normalization|
+| training_history_calibrated.json | Training log and evaluation metrics        |
+| feature_names.txt              | List of input features used during training |
+| processed_data.csv             | Preprocessed dataset for training           |
+| walk_forward_data.csv          | Labeled splits for walk-forward testing     |
 
-## Project Timeline
+---
 
-- Week 1: Setup and Data Pipeline
-- Week 2: Modeling and Regime Detection
-- Week 3: Trading Engine and Backtesting
-- Week 4: Testing, Visualization, and Paper Finalization
+## Evaluation Summary
 
-## Course Requirements
+- **Test Accuracy:** 89.1%
+- **Bearish Accuracy:** 91.64%
+- **Neutral Accuracy:** 85.02%
+- **Bullish Accuracy:** 91.17%
 
-This project is being completed as the final project for CPE 593: Applied Data Structures and Algorithms.
+Most classification errors occurred within the neutral regime. Confidence scores were useful for filtering uncertain predictions and improving risk-adjusted decision making.
+
+---
+
+## Theoretical Context
+
+This project applies and extends several core topics from CpE646: Pattern Recognition and Classification:
+
+- Supervised learning with softmax-based decision boundaries
+- Dimensionality reduction using Principal Component Analysis
+- Feature importance via mutual information and random forest
+- Evaluation with confusion matrices and regime transition analysis
+- Handling class imbalance with Focal Loss and weighting
+- Time-series classification using sequential deep learning models
+
+---
+
+## Future Work
+
+- Expand to multi-asset regime detection (e.g., ETH, SOL)
+- Integrate sentiment and news-based features
+- Test transformer-based sequence models
+- Build real-time inference and alerting dashboard
+
+---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is intended for academic, research, and non-commercial use.
