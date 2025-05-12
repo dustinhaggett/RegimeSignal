@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Trading strategy implementation for RegimeAlpha.
+Trading strategy implementation for RegimeSignal.
 Generates trading signals based on regime predictions and confidence scores.
 """
 

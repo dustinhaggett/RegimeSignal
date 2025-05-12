@@ -248,7 +248,7 @@ def main():
         feature_engineer = FeatureEngineer()
         data = feature_engineer.load_data()
         
-        results_dir = '/Users/berlin/Desktop/RegimeAlpha/RegimeAlpha/data/results'
+        results_dir = '/Users/berlin/Desktop/RegimeSignal/RegimeSignal/data/results'
         signals = pd.read_csv(os.path.join(results_dir, 'trading_signals.csv'), index_col=0)
         signals.index = pd.to_datetime(signals.index)
         

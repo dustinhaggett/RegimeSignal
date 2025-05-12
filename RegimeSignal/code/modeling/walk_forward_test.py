@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Walk-forward testing module for RegimeAlpha.
+Walk-forward testing module for RegimeSignal.
 Implements walk-forward analysis to validate model performance on unseen data.
 """
 

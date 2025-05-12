@@ -166,7 +166,7 @@ class LSTMTrainer:
         # Set default data path if not provided
         if data_path is None:
             project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-            data_path = os.path.join(project_root, 'RegimeAlpha', 'data', 'processed', 'processed_data.csv')
+            data_path = os.path.join(project_root, 'RegimeSignal', 'data', 'processed', 'processed_data.csv')
             
         self.data_path = data_path
         self.sequence_length = sequence_length
@@ -464,7 +464,7 @@ class LSTMTrainer:
         try:
             # Create output directory using relative path
             project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-            output_dir = os.path.join(project_root, 'RegimeAlpha', 'models', 'lstm')
+            output_dir = os.path.join(project_root, 'RegimeSignal', 'models', 'lstm')
             os.makedirs(output_dir, exist_ok=True)
             
             # Save model

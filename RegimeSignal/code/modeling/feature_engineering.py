@@ -199,7 +199,7 @@ class FeatureEngineer:
         try:
             # Create processed directory if it doesn't exist
             project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-            processed_dir = os.path.join(project_root, 'RegimeAlpha', 'data', 'processed')
+            processed_dir = os.path.join(project_root, 'RegimeSignal', 'data', 'processed')
             os.makedirs(processed_dir, exist_ok=True)
             
             # Save to CSV
@@ -221,7 +221,7 @@ class FeatureEngineer:
         try:
             # Try to load existing processed data
             project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-            processed_path = os.path.join(project_root, 'RegimeAlpha', 'data', 'processed', 'processed_data.csv')
+            processed_path = os.path.join(project_root, 'RegimeSignal', 'data', 'processed', 'processed_data.csv')
             
             if os.path.exists(processed_path):
                 self.data = pd.read_csv(processed_path)
